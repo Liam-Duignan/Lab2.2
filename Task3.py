@@ -1,6 +1,10 @@
+import time
+start = time.time()
+
 from collections import defaultdict
 
 num = 1 #number the ip placed
+send = ""
 item = 0 #item in the list to check
 counts = defaultdict(int)           # Create a dictionary to keep track of IPs
 
@@ -40,8 +44,22 @@ def top_n(counts, n=5):
 
 test = top_n(counts, n=5)
 #print(test)
+
 print("Top 5 Attacker Ip")
-for i in range(5):
-    print(num , test[i])
-    num = num +1
-   
+#for i in range(5):
+#    print(num , test[i])
+#    send = test[i]
+#    num = num +1
+
+with open("failed_counts.txt", "w") as out:
+    for x,y in test: # as long as there is an x and y value , do the loop
+        print(f"{num}.{x} - {y}")
+        send = (f"{num}.{x} - {y}")
+        out.write(f"{send}" + "\n")
+        num = num+1
+
+
+# run counting
+end = time.time()
+print("Wrote failed_counts.txt")
+print("Elapsed:", round(end-start,5), "seconds")
