@@ -1,6 +1,7 @@
 from collections import defaultdict
 
-
+num = 1 #number the ip placed
+item = 0 #item in the list to check
 counts = defaultdict(int)           # Create a dictionary to keep track of IPs
 
 def ip_parse(line):
@@ -29,4 +30,18 @@ with open("LOGFILE.log") as f:
             ip = ip_parse(line)
             if ip:
                 counts[ip] += 1
-print(counts)
+#print(counts)
+
+
+
+
+def top_n(counts, n=5):
+    return sorted(counts.items(), key=lambda kv: kv[1], reverse=True)[:n] #Line from mark , do not think about it too much
+
+test = top_n(counts, n=5)
+#print(test)
+print("Top 5 Attacker Ip")
+for i in range(5):
+    print(num , test[i])
+    num = num +1
+   
